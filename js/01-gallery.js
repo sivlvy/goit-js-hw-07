@@ -3,6 +3,9 @@ import { galleryItems } from "./gallery-items.js";
 
 const list = document.querySelector(".gallery");
 
+let instance;
+
+
 function createMarkup(arr) {
 	return arr
 		.map(
@@ -32,19 +35,16 @@ function handleClick(event) {
 		return;
 	}
 	const source = currentTarget.getAttribute("data-source");
-	const instance = basicLightbox.create(`<img src="${source}" alt="${currentTargetAlt}">`);
+	instance = basicLightbox.create(`<img src="${source}" alt="${currentTargetAlt}">`);
 	instance.show();
 }
 
-let instance;
 
-//*Не знаю в чому саме проблема. Надіюсь ви мені підскажете :)
-
-function Esc(event) {
+function esc(event) {
 	if (event.code === "Escape") {
 		instance.close();
 	}
 }
 
 list.addEventListener("click", handleClick);
-list.addEventListener("keydown", Esc);
+list.addEventListener("keydown", esc);
